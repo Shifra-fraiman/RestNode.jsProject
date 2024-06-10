@@ -1,21 +1,23 @@
-import {Business} from "../models/business.model";
+import {BusinessModel, Business} from "../models/business.model";
 
-export const createBusiness = async (userId: string, business: any): Promise<Business | undefined> => {
-    const newBusiness: Business = {
-        id: "1", // יצירת id
-        userId: userId,
-    };
-    return newBusiness;
+export const createBusiness = async (userId: string, businessId: string): Promise<Business | null> => {
+    const newBusiness = new BusinessModel({businessId, userId});
+    return await newBusiness.save();
+    // const newBusiness: Business = {
+    //     businessId: "1", // יצירת id
+    //     userId: userId,
+    //     business: ""
+    // };
+    // return newBusiness;
 };
 
-export const updateBusiness = async (id: string, business: any): Promise<Business> => {
-    //מציאת העסק הנכון לפי id
-    //שינוי העסק לפי העסק החדש
-    const newBusiness: Business = {
-        id: id,
-        userId: business.userId,
-    };
-    return newBusiness;
+export const updateBusiness = async (id: string, business: Business): Promise<Business | null> => {
+    try {
+        return await BusinessModel.findByIdAndUpdate(id, {business}, {new: true});
+    } catch (error) {
+        console.error("Error update business: " + error);
+        return null;
+    }
 };
 
 // module.exports = {
