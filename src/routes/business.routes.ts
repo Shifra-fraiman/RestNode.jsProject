@@ -1,5 +1,6 @@
 import {Router} from "express";
 import {createBusiness, updateBusiness} from "../controllers/business.controller";
+import {authMiddleware} from "../middlewares/auth.middleware";
 
 const router = Router();
 
@@ -53,7 +54,7 @@ const router = Router();
  *                   type: string
  *                   example: "The business create failed!"
  */
-router.post("/", createBusiness);
+router.post("/",authMiddleware, createBusiness);
 
 /**
  * @swagger
