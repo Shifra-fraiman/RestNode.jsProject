@@ -27,7 +27,7 @@ export const signIn = async (user: User) => {
         if (findOne) {
             const match = await bcrypt.compare(user.password, findOne.password);
             if (match) {
-                const token = jwt.sign({_id: findOne.id?.toString(), name: findOne.userName}, SECRET_KEY, {
+                const token = jwt.sign(findOne, SECRET_KEY, {
                     expiresIn: "2 days",
                 });
                 return token;
