@@ -1,8 +1,18 @@
 import {BusinessModel, Business} from "../models/business.model";
+import {User, UserModel} from "../models/user.model";
 
-export const createBusiness = async (userId: string, businessId: string): Promise<Business | null> => {
-    const newBusiness = new BusinessModel({businessId, userId});
-    return await newBusiness.save();
+export const createBusiness = async (
+    userId: string,
+    businessId: string,
+    businessData?: any
+): Promise<Business | null> => {
+    const findUser = await UserModel.findOne<User | undefined>({userId});
+    if (findUser) {
+        const newBusinessData = businessData ? {businessId, userId, businessData} : {businessId, userId};
+        const newBusiness = new BusinessModel(newBusinessData);
+        return await newBusiness.save();
+    } else return null;
+
     // const newBusiness: Business = {
     //     businessId: "1", // יצירת id
     //     userId: userId,
