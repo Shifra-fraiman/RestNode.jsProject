@@ -9,7 +9,7 @@ export interface Service {
 const ServiceSchema: Schema = new Schema<Service>({
     serviceId: {type: String, required: true, unique: true},
     businesId: {type: String, required: true},
-    serviceData: {type: Object},
+    serviceData: {type: Schema.Types.Mixed, required: false},
 });
 
 export const ServiceModel = model<Service>("Service", ServiceSchema);

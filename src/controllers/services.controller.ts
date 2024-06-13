@@ -1,8 +1,14 @@
 import {Response, Request} from "express";
 import * as servicesService from "../services/services.service";
+import { Service } from "../models/service.model";
+
 
 export const createService = async (req: Request, res: Response) => {
-    const service =await servicesService.createService(req.body.serviceId, req.body.businesId, req.body.serviceData);
+    let service:Service| null=null;
+    if(req.body.serviceData)
+        service =await servicesService.createService(req.body.serviceId, req.body.businesId, req.body.serviceData);
+    else
+        service =await servicesService.createService(req.body.serviceId, req.body.businesId);
     if (service) res.status(200).json(service);
     else res.status(404).send({message: "The service create failed!"});
 };
