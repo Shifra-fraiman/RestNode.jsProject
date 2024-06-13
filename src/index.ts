@@ -6,8 +6,11 @@ import meetingRouter from "./routes/meetings.routes";
 import servicesRouter from "./routes/services.routes";
 import usersRouter from "./routes/users.routes";
 import authRouter from "./routes/auth.routes";
-import mongoose from "mongoose";
+import connectDB from "./database";
 
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 const app = express();
 const port = 3000;
 
@@ -16,31 +19,33 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use("/business", businessRouter);
 app.use("/meetings", meetingRouter);
 app.use("/services", servicesRouter);
-app.use("/users", usersRouter);
+// app.use("/users", usersRouter);
 app.use("/auth", authRouter);
 
-
 setupSwagger(app);
-mongoose
-.connect("mongodb://127.0.0.1:27017/MyBusiness")
-.then(() => {
-    console.log("Connected to MongoDB");
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    });
-})
-.catch((error) => {
-    console.error("Connection error", error);
-});
+// mongoose
+// .connect(process.env.MONGO_URI!)
+// .then(() => {
+//     console.log("Connected to MongoDB");
 
-mongoose.connection.on("error", (err) => {
-    console.error("MongoDB connection error:", err);
-});
-
-mongoose.connection.once("open", () => {
-    console.log("MongoDB connection successful");
-});
-
+// })
+// .catch((error) => {
+//     console.error("Connection error", error);
+// });
+const startServer = async () => {
+    try {
+        await connectDB();
+        app.listen(port, () => {
+            let specificDate: Date = new Date(2024, 5, 13);
+            console.log(`Server is running on port ${port} ${specificDate}`);
+            console.log(`Swagger docs available at http://localhost:${port}/swagger`);
+        });
+    } catch (error) {
+        console.error("Failed to start server:", error);
+        process.exit(1);
+    }
+};
+startServer();
 // app.listen(port, () => {
 //     console.log(`Server is running on http://localhost:${port}`);
 //     console.log(`Swagger docs available at http://localhost:${port}/swagger`);
