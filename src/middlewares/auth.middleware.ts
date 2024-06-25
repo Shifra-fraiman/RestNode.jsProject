@@ -14,8 +14,12 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
         return res.status(403).send("A token is required for authentication");
     }
     try {
+        console.log(`token: ${token}`);
+
         const decoded = jwt.verify(token, process.env.SECRET_KEY!);
-        (req as any).user = decoded;
+        console.log(`decoded: ${decoded}`);
+
+        //(req as any).user = decoded;
     } catch (error) {
         return res.status(401).send("Invalid Token");
     }

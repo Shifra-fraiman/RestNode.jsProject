@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use("/business", businessRouter);
 app.use("/meetings", meetingRouter);
 app.use("/services", servicesRouter);
-// app.use("/users", usersRouter);
-app.use("/auth", authRouter);
+app.use("/users", usersRouter);
+// app.use("/auth", authRouter);
 
 setupSwagger(app);
 // mongoose

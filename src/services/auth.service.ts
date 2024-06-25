@@ -14,27 +14,32 @@ const createPassword = async (password: string): Promise<string> => {
 };
 
 export const signUp = async (user: User) => {
+    console.log(`user ${user.password} ${user.userName} ${user.userId}`);
     const password = user.password;
     const passwordEncoder = await createPassword(password);
     user.password = passwordEncoder;
+    console.log(`user ${user.password} ${user.userName} ${user.userId}`);
     return await userService.createUser(user);
 };
 
-export const signIn = async (user: User) => {
-    const SECRET_KEY= "dr65te654634q458i,24*gytr5";
+export const signIn = async (id: string, userName: string, password: string) => {
     try {
-        const findOne = await UserModel.findById<User | undefined>(user.id);
+        const findOne = await UserModel.findOne<User | undefined>({userName: userName});
+        console.log(`findOne ${findOne}`);
+
         if (findOne) {
-            const match = await bcrypt.compare(user.password, findOne.password);
+            const match = await bcrypt.compare(password, findOne.password);
+            console.log(`match: ${match}`);
+            console.log(`user.password, findOne.password ${password}, ${findOne.password}`);
+
             if (match) {
-                const token = jwt.sign(findOne, SECRET_KEY, {
+                const payload = {userName: findOne.userName, password: password};
+                const token = jwt.sign(payload, process.env.SECRET_KEY!, {
                     expiresIn: "2 days",
                 });
                 return token;
             }
-        }
-        else
-            return findOne;
+        } else return findOne;
     } catch (error) {
         console.log("signIn: " + error);
     }
