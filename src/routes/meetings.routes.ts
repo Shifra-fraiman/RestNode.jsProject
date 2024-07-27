@@ -5,8 +5,8 @@ import {authMiddleware} from "../middlewares/auth.middleware";
 
 const router = Router();
 
-router.post("/", createMeeting);
+router.post("/",authMiddleware, createMeeting);
 router.put("/:id",authMiddleware, updateMeeting);
-router.delete("/:id", deleteMeeting);
+router.delete("/:id",authMiddleware, deleteMeeting);
 
 export default router;

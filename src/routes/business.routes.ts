@@ -8,7 +8,7 @@ const router = Router();
  * @swagger
  * /:
  *  post:
- *     summary: Create a new business
+ *     summary: /business
  *     tags: [Business]
  *     requestBody:
  *       required: true
@@ -19,15 +19,18 @@ const router = Router();
  *             properties:
  *               businessId:
  *                 type: string
- *                 example: "12345"
+ *                 example: "string"
  *               userId:
  *                 type: string
- *                 example: "67890"
+ *                 example: "string"
+ *               businessData:
+ *                 type: Object
+ *                 example: {}
  *             required:
  *               - businessId
  *               - userId
  *     responses:
- *       201:
+ *       200:
  *         description: Successfully created the business
  *         content:
  *           application/json:
@@ -40,19 +43,6 @@ const router = Router();
  *                 userId:
  *                   type: string
  *                   example: "string"
- *                 otherProperty:
- *                   type: string
- *                   example: "value"
- *       404:
- *         description: The business create failed
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "The business create failed!"
  */
 router.post("/",authMiddleware, createBusiness);
 
@@ -86,6 +76,6 @@ router.post("/",authMiddleware, createBusiness);
  *       200:
  *         description: A successful response
  */
-router.put("/:id", updateBusiness);
+router.put("/:id",authMiddleware, updateBusiness);
 
 export default router;

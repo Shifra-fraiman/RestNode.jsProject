@@ -12,7 +12,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 const app = express();
-const port = 3000;
+const port =process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -20,7 +20,7 @@ app.use("/business", businessRouter);
 app.use("/meetings", meetingRouter);
 app.use("/services", servicesRouter);
 app.use("/users", usersRouter);
-// app.use("/auth", authRouter);
+app.use("/auth", authRouter);
 
 setupSwagger(app);
 // mongoose
@@ -50,3 +50,11 @@ startServer();
 //     console.log(`Server is running on http://localhost:${port}`);
 //     console.log(`Swagger docs available at http://localhost:${port}/swagger`);
 // });
+
+
+//הרצה עם npm start
+//שימי לב שבקןנטרולר של המשתמשים לא דרכו ליצור משתמש אלא 
+//דרך הsignUp
+//לגמור להטמיע את הswagger
+//unitTest-לפחות דף אחד 
+//שימוש בתכונה נוספת שלר למדנו

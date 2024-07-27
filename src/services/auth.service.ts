@@ -19,10 +19,10 @@ export const signUp = async (user: User) => {
     const passwordEncoder = await createPassword(password);
     user.password = passwordEncoder;
     console.log(`user ${user.password} ${user.userName} ${user.userId}`);
-    return await userService.createUser(user);
+    return await userService.createUser(user.userId, user.userName, user.password);
 };
 
-export const signIn = async (id: string, userName: string, password: string) => {
+export const signIn = async (userName: string, password: string) => {
     try {
         const findOne = await UserModel.findOne<User | undefined>({userName: userName});
         console.log(`findOne ${findOne}`);

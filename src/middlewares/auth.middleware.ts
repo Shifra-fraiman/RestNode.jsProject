@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+    console.log("hello middlware!");
+
     const token =
         req.body.token ||
         req.query.token ||
@@ -11,7 +13,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
         req.headers["authorization"]?.split(" ").pop();
 
     if (!token) {
-        return res.status(403).send("A token is required for authentication");
+        return res.status(401).send("A token is required for authentication");
     }
     try {
         console.log(`token: ${token}`);
