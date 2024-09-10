@@ -13,13 +13,58 @@ const options = {
         tags: [
             {
                 name: "Business",
-                description: "For creating a business and updating details about it",
             },
             {
                 name: "User",
-                description: "Create users",
+            },
+            {
+                name: "Auth",
+                // description: "Create users",
             },
         ],
+        components: {
+            securitySchemes: {  
+                bearerAuth: {  
+                    type: "http",
+                    scheme: "bearer",
+                    bearerFormat: "JWT"
+                }  
+            },
+            security: [{
+                bearerAuth: [] // אוטומטית יישלח עם כל הבקשות שמוגדרות כמאובטחות
+            }],
+            schemas: {
+                User: {
+                    type: "object",
+                    properties: {
+                        name: {
+                            type: "string",
+                            example: "JohnDoe"
+                        },
+                        password: {
+                            type: "string",
+                            example: "password123"
+                        }
+                    },
+                    required: ["name", "password"]
+                },
+                Business: {
+                    type: "object",
+                    properties: {
+                        userId: {
+                            type: "string",
+                            example: "RWGE123"
+                        },
+                        businessData: {
+                            type: Object,
+                            example: { name: "ron-store"}
+                        }
+                    },
+                    required: ["userId"]
+                },
+                
+            }
+        }
     },
     apis: ["./src/routes/*.ts"],
 };
