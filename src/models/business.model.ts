@@ -1,14 +1,14 @@
-import {Schema, model, Document} from "mongoose";
+import {Mongoose, Schema, model, Document} from "mongoose";
 
-export interface Business {
-    businessId: string;
-    userId: string;
+export interface Business extends Document{
+    // businessId: string;
+    userId: Schema.Types.ObjectId;
     businessData?: any;
 }
 
 const businessSchema = new Schema<Business>({
-    businessId: {type: String, required: true, unique: true},
-    userId: {type: String, required: true},
+    // businessId: {type: String, required: true, unique: true},
+    userId: { type: Schema.Types.ObjectId, ref: 'User' },
     businessData: {type: Schema.Types.Mixed, required: false},
 });
 

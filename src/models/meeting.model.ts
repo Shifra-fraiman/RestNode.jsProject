@@ -1,15 +1,15 @@
 import {Schema, model} from "mongoose";
 
 export interface Meeting {
-    businessId: string;
-    serviceId: string;
+    businessId: Schema.Types.ObjectId;
+    serviceId: Schema.Types.ObjectId;
     meetingId: string;
     meetingData: {dateAndStartTime: Date; duration: number; meeting?: any};
 }
 
 const meetingSchema: Schema = new Schema<Meeting>({
-    businessId: {type: String, required: true},
-    serviceId: {type: String, required: true},
+    businessId: { type: Schema.Types.ObjectId, ref: 'Business' },
+    serviceId: { type: Schema.Types.ObjectId, ref: 'Service' },
     meetingId: {type: String, required: true, unique: true},
     meetingData: {
         dateAndStartTime: {type: Date, required: true},
