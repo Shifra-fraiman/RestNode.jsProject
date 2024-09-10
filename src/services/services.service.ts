@@ -1,13 +1,16 @@
+import { ObjectId } from "typeorm";
 import {ServiceModel, Service} from "../models/service.model";
+import mongoose from "mongoose";
 
 export const createService = async (
-    serviceId: string,
     businesId: string,
+    name:string, 
     serviceData?: any
 ): Promise<Service | null> => {
     try {
-        const newServiceData = serviceData ? {serviceId, businesId, serviceData} : {serviceId, businesId};
-        const newService = await new ServiceModel(newServiceData);
+        const newServiceData = serviceData ? {businesId,name, serviceData} : {businesId, name};
+        const newService = new ServiceModel(newServiceData);
+        await newService.save();
         return newService;
     } catch (error) {
         console.error("The service created faild: " + error);
@@ -15,17 +18,18 @@ export const createService = async (
     }
 };
 
-export const updateService = async (serviceId: string, service: Service) => {
+export const updateService = async (id: string, businesId:string , name: string, serviceData?: any) => {
     try {
-        return await ServiceModel.findByIdAndUpdate(serviceId, {service}, {new: true});
+        const newService= serviceData? { businesId , name, serviceData} :  { businesId , name};
+        return await ServiceModel.findByIdAndUpdate(new mongoose.Types.ObjectId(id), newService, {new: true});
     } catch (error) {
         console.error("The service update faild: " + error);
     }
 };
 
-export const deleteService = async (serviceId: string) => {
+export const deleteService = async (id: string) => {
     try {
-        return await ServiceModel.findByIdAndDelete(serviceId);
+        return await ServiceModel.findByIdAndDelete(id);
     } catch (error) {
         console.error("The service update faild: " + error);
     }
