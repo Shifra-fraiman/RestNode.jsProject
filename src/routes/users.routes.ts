@@ -1,48 +1,49 @@
 import {Router} from "express";
-import {createUser} from "../controllers/users.controller";
+import {createUser, getUser} from "../controllers/users.controller";
 import {authMiddleware} from "../middlewares/auth.middleware";
 
 const router = Router();
 /**
  * @swagger
- * /:
+ * /User:
  *  post:
- *     summary: /users
- *     tags: [Users]
+ *     tags: [User]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               businessId:
- *                 type: string
- *                 example: "string"
- *               userId:
- *                 type: string
- *                 example: "string"
- *               businessData:
- *                 type: Object
- *                 example: {}
- *             required:
- *               - businessId
- *               - userId
+ *             $ref: '#/components/schemas/User'
  *     responses:
  *       200:
- *         description: Successfully created the business
+ *         description: Successfully created the user
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 businessId:
- *                   type: string
- *                   example: "string"
- *                 userId:
- *                   type: string
- *                   example: "string"
+ *               $ref: '#/components/schemas/User'
  */
-router.post("/", authMiddleware, createUser);
+router.post("", authMiddleware, createUser);
+/**
+ * @swagger
+ * /User/{id}:
+ *  get:
+ *     tags: [User]
+ *     security:
+ *      - bearerAuth: []  
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Successfully created the user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ */
+router.get("/:id", authMiddleware, getUser);
 
 export default router;
