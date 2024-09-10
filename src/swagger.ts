@@ -21,6 +21,9 @@ const options = {
                 name: "Auth",
                 // description: "Create users",
             },
+            {
+                name: "Service",
+            },
         ],
         components: {
             securitySchemes: {  
@@ -53,7 +56,7 @@ const options = {
                     properties: {
                         userId: {
                             type: "string",
-                            example: "RWGE123"
+                            example: "user123"
                         },
                         businessData: {
                             type: Object,
@@ -61,6 +64,24 @@ const options = {
                         }
                     },
                     required: ["userId"]
+                },
+                Service: {
+                    type: "object",
+                    properties: {
+                        businesId: {
+                            type: "string",
+                            example: "business123"
+                        },
+                        name:{
+                            type: "string",
+                            example: "name of service"
+                        },
+                        serviceData: {
+                            type: Object,
+                            example: { cost: "350"}
+                        }
+                    },
+                    required: ["businesId", "name"]
                 },
                 
             }
