@@ -16,22 +16,14 @@ const port =process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use("/business", businessRouter);
-app.use("/meetings", meetingRouter);
-app.use("/services", servicesRouter);
-app.use("/users", usersRouter);
-app.use("/auth", authRouter);
+app.use("/Business", businessRouter);
+app.use("/Meeting", meetingRouter);
+app.use("/Service", servicesRouter);
+app.use("/User", usersRouter);
+app.use("/Auth", authRouter);
 
 setupSwagger(app);
-// mongoose
-// .connect(process.env.MONGO_URI!)
-// .then(() => {
-//     console.log("Connected to MongoDB");
 
-// })
-// .catch((error) => {
-//     console.error("Connection error", error);
-// });
 const startServer = async () => {
     try {
         await connectDB();
@@ -46,10 +38,6 @@ const startServer = async () => {
     }
 };
 startServer();
-// app.listen(port, () => {
-//     console.log(`Server is running on http://localhost:${port}`);
-//     console.log(`Swagger docs available at http://localhost:${port}/swagger`);
-// });
 
 
 //הרצה עם npm start
