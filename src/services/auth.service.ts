@@ -13,18 +13,18 @@ const createPassword = async (password: string): Promise<string> => {
     return hash;
 };
 
-export const signUp = async (user: User) => {
-    console.log(`user ${user.password} ${user.userName} ${user.userId}`);
-    const password = user.password;
-    const passwordEncoder = await createPassword(password);
-    user.password = passwordEncoder;
-    console.log(`user ${user.password} ${user.userName} ${user.userId}`);
-    return await userService.createUser(user.userId, user.userName, user.password);
-};
+// export const signUp = async (user: User) => {
+//     console.log(`user ${user.password} ${user.userName} ${user.userId}`);
+//     const password = user.password;
+//     const passwordEncoder = await createPassword(password);
+//     user.password = passwordEncoder;
+//     console.log(`user ${user.password} ${user.userName} ${user.userId}`);
+//     return await userService.createUser(user.userId, user.userName, user.password);
+// };
 
-export const signIn = async (userName: string, password: string) => {
+export const signIn = async (name: string, password: string): Promise<string | undefined> => {
     try {
-        const findOne = await UserModel.findOne<User | undefined>({userName: userName});
+        const findOne = await UserModel.findOne<User | undefined>({name: name});
         console.log(`findOne ${findOne}`);
 
         if (findOne) {
@@ -33,13 +33,13 @@ export const signIn = async (userName: string, password: string) => {
             console.log(`user.password, findOne.password ${password}, ${findOne.password}`);
 
             if (match) {
-                const payload = {userName: findOne.userName, password: password};
+                const payload = {name: findOne.name, password: password};
                 const token = jwt.sign(payload, process.env.SECRET_KEY!, {
                     expiresIn: "2 days",
                 });
                 return token;
             }
-        } else return findOne;
+        }
     } catch (error) {
         console.log("signIn: " + error);
     }
