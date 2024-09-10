@@ -3,12 +3,11 @@ import {User, UserModel} from "../models/user.model";
 
 export const createBusiness = async (
     userId: string,
-    businessId: string,
     businessData?: any
 ): Promise<Business | null> => {
-    const findUser = await UserModel.findOne<User | undefined>({userId});
+    const findUser = await UserModel.findById<User | undefined>(userId);
     if (findUser) {
-        const newBusinessData = businessData ? {businessId, userId, businessData} : {businessId, userId};
+        const newBusinessData = businessData ? {userId, businessData} : {userId};
         const newBusiness = new BusinessModel(newBusinessData);
         return await newBusiness.save();
     } else return null;
@@ -21,9 +20,9 @@ export const createBusiness = async (
     // return newBusiness;
 };
 
-export const updateBusiness = async (id: string, business: Business): Promise<Business | null> => {
+export const updateBusiness = async (business: Business): Promise<Business | null> => {
     try {
-        return await BusinessModel.findByIdAndUpdate(id, {business}, {new: true});
+        return await BusinessModel.findByIdAndUpdate(business._id, {business}, {new: true});
     } catch (error) {
         console.error("Error update business: " + error);
         return null;

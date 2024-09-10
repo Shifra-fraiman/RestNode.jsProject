@@ -6,76 +6,48 @@ const router = Router();
 
 /**
  * @swagger
- * /:
- *  post:
- *     summary: /business
+ * /Business:
+ *   post:
  *     tags: [Business]
+ *     security:
+ *      - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               businessId:
- *                 type: string
- *                 example: "string"
- *               userId:
- *                 type: string
- *                 example: "string"
- *               businessData:
- *                 type: Object
- *                 example: {}
- *             required:
- *               - businessId
- *               - userId
+ *             $ref: '#/components/schemas/Business'
  *     responses:
- *       200:
- *         description: Successfully created the business
+ *       '200':
+ *         description: Successfully created business
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 businessId:
- *                   type: string
- *                   example: "string"
- *                 userId:
- *                   type: string
- *                   example: "string"
+ *               $ref: '#/components/schemas/Business'
  */
-router.post("/",authMiddleware, createBusiness);
+router.post("", authMiddleware, createBusiness);
 
 /**
  * @swagger
- * /:id:
+ * /Business:
  *   put:
- *     summary: Example endpoint
  *     tags: [Business]
- *     parameters:
- *       - in: query
- *         name: param1
- *         required: true
- *         schema:
- *           type: string
- *         description: Parameter 1
+ *     security:
+ *      - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               businessId:
- *                 type: string
- *                 example: "value1"
- *               userId:
- *                 type: string
- *                 example: "value2"
+ *             $ref: '#/components/schemas/Business'
  *     responses:
- *       200:
- *         description: A successful response
+ *       '200':
+ *         description: Successfully created business
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Business'
  */
-router.put("/:id",authMiddleware, updateBusiness);
+router.put("", authMiddleware, updateBusiness);
 
 export default router;

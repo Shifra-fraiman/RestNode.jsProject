@@ -6,14 +6,16 @@ import {controllerLog, errorLog} from "../config/log-config";
 export const createBusiness = async (req: Request, res: Response) => {
     let business: Business | null = null;
     if (req.body.businessData) {
-        business = await businessService.createBusiness(req.body.userId, req.body.businessId, req.body.businessData);
+        const { userId, businessData }= req.body;
+        business = await businessService.createBusiness(userId, businessData);
         controllerLog.info(
             `Received request for createBusiness with body: ${JSON.stringify(req.body.userId)} ${JSON.stringify(
                 req.body.businessId
             )} ${JSON.stringify(req.body.businessData)}`
         );
     } else {
-        business = await businessService.createBusiness(req.body.userId, req.body.businessId);
+        const { userId }= req.body;
+        business = await businessService.createBusiness(userId);
         controllerLog.info(
             `Received request for createBusiness with body: ${JSON.stringify(req.body.userId)} ${JSON.stringify(
                 req.body.businessId
@@ -30,11 +32,11 @@ export const createBusiness = async (req: Request, res: Response) => {
 
 export const updateBusiness = async (req: Request, res: Response) => {
     controllerLog.info(
-        `Received request for updateBusiness with params: ${JSON.stringify(req.params.id)} and body: ${JSON.stringify(
+        `Received request for updateBusiness with body: ${JSON.stringify(
             req.body.business
         )}`
     );
-    const business = await businessService.updateBusiness(req.params.id, req.body.business);
+    const business = await businessService.updateBusiness(req.body.business);
     if (business) {
         res.status(201).json(business);
     } else {
