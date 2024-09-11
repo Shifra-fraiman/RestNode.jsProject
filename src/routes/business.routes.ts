@@ -42,7 +42,7 @@ router.post("", authMiddleware, createBusiness);
  *             $ref: '#/components/schemas/Business'
  *     responses:
  *       '200':
- *         description: Successfully created business
+ *         description: Successfully update business
  *         content:
  *           application/json:
  *             schema:

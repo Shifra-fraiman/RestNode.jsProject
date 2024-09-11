@@ -38,7 +38,7 @@ router.post("", authMiddleware, createUser);
  *         required: true
  *     responses:
  *       200:
- *         description: Successfully created the user
+ *         description: Successfully get user
  *         content:
  *           application/json:
  *             schema:
