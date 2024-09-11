@@ -1,19 +1,27 @@
-import {Schema, model} from "mongoose";
+import {Schema, Document, model} from "mongoose";
 
-export interface Meeting {
+export interface Meeting extends Document {
     businessId: Schema.Types.ObjectId;
     serviceId: Schema.Types.ObjectId;
-    meetingId: string;
-    meetingData: {dateAndStartTime: Date; duration: number; meeting?: any};
+    meetingData: {
+        dateAndStartTime: Date;
+        duration: number;
+        customerDetails: {name: String; phone: String; email: String};
+        meeting?: any;
+    };
 }
 
 const meetingSchema: Schema = new Schema<Meeting>({
-    businessId: { type: Schema.Types.ObjectId, ref: 'Business' },
-    serviceId: { type: Schema.Types.ObjectId, ref: 'Service' },
-    meetingId: {type: String, required: true, unique: true},
+    businessId: {type: Schema.Types.ObjectId, ref: "Business"},
+    serviceId: {type: Schema.Types.ObjectId, ref: "Service"},
     meetingData: {
         dateAndStartTime: {type: Date, required: true},
         duration: {type: Number, required: true},
+        customerDetails: {
+            name: {type: String, required: true},
+            phone: {type: String},
+            email: {type: String},
+        },
         meeting: {type: Schema.Types.Mixed, required: false},
     },
 });
