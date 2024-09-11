@@ -19,73 +19,126 @@ const options = {
             },
             {
                 name: "Auth",
-                // description: "Create users",
             },
             {
                 name: "Service",
             },
+            {
+                name: "Meeting",
+            },
         ],
         components: {
-            securitySchemes: {  
-                bearerAuth: {  
+            securitySchemes: {
+                bearerAuth: {
                     type: "http",
                     scheme: "bearer",
-                    bearerFormat: "JWT"
-                }  
+                    bearerFormat: "JWT",
+                },
             },
-            security: [{
-                bearerAuth: [] // אוטומטית יישלח עם כל הבקשות שמוגדרות כמאובטחות
-            }],
+            security: [
+                {
+                    bearerAuth: [], // אוטומטית יישלח עם כל הבקשות שמוגדרות כמאובטחות
+                },
+            ],
             schemas: {
                 User: {
                     type: "object",
                     properties: {
                         name: {
                             type: "string",
-                            example: "JohnDoe"
+                            example: "JohnDoe",
                         },
                         password: {
                             type: "string",
-                            example: "password123"
-                        }
+                            example: "password123",
+                        },
                     },
-                    required: ["name", "password"]
+                    required: ["name", "password"],
                 },
                 Business: {
                     type: "object",
                     properties: {
                         userId: {
                             type: "string",
-                            example: "user123"
+                            example: "user123",
                         },
                         businessData: {
-                            type: Object,
-                            example: { name: "ron-store"}
-                        }
+                            type: "object",
+                            example: {name: "ron-store"},
+                        },
                     },
-                    required: ["userId"]
+                    required: ["userId"],
                 },
                 Service: {
                     type: "object",
                     properties: {
-                        businesId: {
+                        businessId: {
                             type: "string",
-                            example: "business123"
+                            example: "business123",
                         },
-                        name:{
+                        name: {
                             type: "string",
-                            example: "name of service"
+                            example: "name of service",
                         },
                         serviceData: {
-                            type: Object,
-                            example: { cost: "350"}
-                        }
+                            type: "object",
+                            example: {cost: "350"},
+                        },
                     },
-                    required: ["businesId", "name"]
+                    required: ["businessId", "name"],
                 },
-                
-            }
-        }
+                Meeting: {
+                    type: "object",
+                    properties: {
+                        businessId: {
+                            type: "string",
+                            example: "business123",
+                        },
+                        serviceId: {
+                            type: "string",
+                            example: "business123",
+                        },
+                        meetingData: {
+                            type: "object",
+                            properties: {
+                                dateAndStartTime: {
+                                    type: "string",
+                                    format: "date-time",
+                                    example: "2024-09-10T10:00:00Z",
+                                },
+                                duration: {
+                                    type: "integer",
+                                    example: 2,
+                                },
+                                customerDetails: {
+                                    type: "object",
+                                    properties: {
+                                        name: {
+                                            type: "string",
+                                            example: "John Doe",
+                                        },
+                                        phone: {
+                                            type: "string",
+                                            example: "123-456-7890",
+                                        },
+                                        email: {
+                                            type: "string",
+                                            example: "john.doe@example.com",
+                                        },
+                                    },
+                                    required: ["name"],
+                                },
+                                meeting: {
+                                    type: "object",
+                                },
+                            },
+                            required: ["dateAndStartTime", "duration", "customerDetails"],
+                        },
+                    },
+                    required: ["businessId", "serviceId", "meetingData"],
+                },
+            },
+        },
     },
     apis: ["./src/routes/*.ts"],
 };

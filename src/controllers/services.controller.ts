@@ -7,20 +7,20 @@ export const createService = async (req: Request, res: Response) => {
     let service: Service | null = null;
     if (req.body.serviceData) {
         controllerLog.info(
-            `Received request for createService with body: ${JSON.stringify(
-                req.body.businesId
-            )} ${JSON.stringify(req.body.serviceData)}`
+            `Received request for createService with body: ${JSON.stringify(req.body.businessId)} ${JSON.stringify(
+                req.body.serviceData
+            )}`
         );
-        const { businesId, name, serviceData}= req.body;
-        service = await servicesService.createService(businesId,name, serviceData);
+        const {businessId, name, serviceData} = req.body;
+        service = await servicesService.createService(businessId, name, serviceData);
     } else {
         controllerLog.info(
             `Received request for createService with body: ${JSON.stringify(req.body.serviceId)} ${JSON.stringify(
-                req.body.businesId
+                req.body.businessId
             )}`
         );
-        const { businesId, name}= req.body;
-        service = await servicesService.createService(businesId, name);
+        const {businessId, name} = req.body;
+        service = await servicesService.createService(businessId, name);
     }
     if (service) res.status(200).json(service);
     else {
@@ -30,14 +30,10 @@ export const createService = async (req: Request, res: Response) => {
 };
 
 export const updateService = async (req: Request, res: Response) => {
-    controllerLog.info(
-        `Received request for updateService with body: ${JSON.stringify(
-            req.body.service
-        )}`
-    );
-    const { businesId, name, serviceData}= req.body;
-    const { id} =req.params;
-    const service = await servicesService.updateService(id, businesId, name, serviceData);
+    controllerLog.info(`Received request for updateService with body: ${JSON.stringify(req.body.service)}`);
+    const {businessId, name, serviceData} = req.body;
+    const {id} = req.params;
+    const service = await servicesService.updateService(id, businessId, name, serviceData);
     if (service) res.status(200).json(service);
     else {
         errorLog.error(`Error in updateService`);
