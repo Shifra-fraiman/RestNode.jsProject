@@ -24,8 +24,6 @@ app.use("/Auth", authRouter);
 
 setupSwagger(app);
 
-// let server: http.Server;
-
 export const startServer = async () => {
     try {
         await connectDB();
@@ -41,17 +39,7 @@ export const startServer = async () => {
 };
 startServer();
 
-
-// export const stopServer = async () => {
-//     return new Promise<void>((resolve) => {
-//         server.close(() => {
-//             console.log(`Server stopped`);
-//             resolve();
-//         });
-//     });
-// };
 export default app;
 
 //הרצה עם npm start
-//unitTest-לפחות דף אחד 
 //שימוש בתכונה נוספת שלר למדנו
