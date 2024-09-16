@@ -7,12 +7,12 @@ import servicesRouter from "./routes/services.routes";
 import usersRouter from "./routes/users.routes";
 import authRouter from "./routes/auth.routes";
 import connectDB from "./database";
-
-import mongoose from "mongoose";
 import dotenv from "dotenv";
+import http from 'http';
+
 dotenv.config();
 const app = express();
-const port =process.env.PORT || 3000;
+const port =process.env.PORT || 4000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -24,7 +24,9 @@ app.use("/Auth", authRouter);
 
 setupSwagger(app);
 
-const startServer = async () => {
+// let server: http.Server;
+
+export const startServer = async () => {
     try {
         await connectDB();
         app.listen(port, () => {
@@ -40,9 +42,16 @@ const startServer = async () => {
 startServer();
 
 
+// export const stopServer = async () => {
+//     return new Promise<void>((resolve) => {
+//         server.close(() => {
+//             console.log(`Server stopped`);
+//             resolve();
+//         });
+//     });
+// };
+export default app;
+
 //הרצה עם npm start
-//שימי לב שבקןנטרולר של המשתמשים לא דרכו ליצור משתמש אלא 
-//דרך הsignUp
-//לגמור להטמיע את הswagger
 //unitTest-לפחות דף אחד 
 //שימוש בתכונה נוספת שלר למדנו

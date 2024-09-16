@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 export const createService = async (businessId: string, name: string, serviceData?: any): Promise<Service | null> => {
     try {
         const newServiceData = serviceData ? {businessId, name, serviceData} : {businessId, name};
-        const newService = new ServiceModel(newServiceData);
+        const newService: Service = new ServiceModel(newServiceData );
         await newService.save();
         return newService;
     } catch (error) {
@@ -26,6 +26,13 @@ export const updateService = async (id: string, businessId: string, name: string
 export const deleteService = async (id: string) => {
     try {
         return await ServiceModel.findByIdAndDelete(id);
+    } catch (error) {
+        console.error("The service update faild: " + error);
+    }
+};
+export const getAllServices = async () => {
+    try {
+        return await ServiceModel.find();
     } catch (error) {
         console.error("The service update faild: " + error);
     }

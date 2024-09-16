@@ -1,12 +1,12 @@
 import {Response, Request} from "express";
 import * as businessService from "../services/business.service";
 import {Business} from "../models/business.model";
-import {controllerLog, errorLog} from "../config/log-config";
+import {controllerLog, errorLog} from "../../config/log-config";
 
 export const createBusiness = async (req: Request, res: Response) => {
     let business: Business | null = null;
     if (req.body.businessData) {
-        const { userId, businessData }= req.body;
+        const {userId, businessData} = req.body;
         business = await businessService.createBusiness(userId, businessData);
         controllerLog.info(
             `Received request for createBusiness with body: ${JSON.stringify(req.body.userId)} ${JSON.stringify(
@@ -14,7 +14,7 @@ export const createBusiness = async (req: Request, res: Response) => {
             )} ${JSON.stringify(req.body.businessData)}`
         );
     } else {
-        const { userId }= req.body;
+        const {userId} = req.body;
         business = await businessService.createBusiness(userId);
         controllerLog.info(
             `Received request for createBusiness with body: ${JSON.stringify(req.body.userId)} ${JSON.stringify(
@@ -31,11 +31,7 @@ export const createBusiness = async (req: Request, res: Response) => {
 };
 
 export const updateBusiness = async (req: Request, res: Response) => {
-    controllerLog.info(
-        `Received request for updateBusiness with body: ${JSON.stringify(
-            req.body.business
-        )}`
-    );
+    controllerLog.info(`Received request for updateBusiness with body: ${JSON.stringify(req.body.business)}`);
     const business = await businessService.updateBusiness(req.body.business);
     if (business) {
         res.status(201).json(business);

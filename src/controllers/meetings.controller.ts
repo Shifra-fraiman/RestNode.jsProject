@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import * as meetingService from "../services/meetings.service";
-import {controllerLog, errorLog} from "../config/log-config";
+import {controllerLog, errorLog} from "../../config/log-config";
 
 export const createMeeting = async (req: Request, res: Response) => {
     controllerLog.info(
@@ -10,7 +10,7 @@ export const createMeeting = async (req: Request, res: Response) => {
     );
     const {businessId, serviceId, meetingData} = req.body;
     const meeting = await meetingService.createMeeting(businessId, serviceId, meetingData);
-    if (meeting) res.status(200).json(meeting);
+    if (meeting) res.status(201).json(meeting);
     else {
         errorLog.error(`Error in createMeeting`);
         res.status(404).send({message: "The meeting create failed!"});

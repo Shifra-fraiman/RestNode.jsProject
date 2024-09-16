@@ -2,12 +2,12 @@ import * as log4js from "log4js";
 
 log4js.configure({
     appenders: {
-        controller: {type: "file", filename: "../logs/controller.log"},
-        service: {type: "file", filename: "../logs/service.log"},
-        route: {type: "file", filename: "../logs/route.log"},
-        middlware: {type: "file", filename: "../logs/middlware.log"},
-        app: {type: "file", filename: "../logs/app.log"},
-        errorFile: {type: "file", filename: "../logs/error.log"},
+        controller: {type: "file", filename: "./logs/controller.log"},
+        service: {type: "file", filename: "./logs/service.log"},
+        route: {type: "file", filename: "./logs/route.log"},
+        middlware: {type: "file", filename: "./logs/middlware.log"},
+        app: {type: "file", filename: "./logs/app.log"},
+        errorFile: {type: "file", filename: "./logs/error.log"},
     },
     categories: {
         default: {appenders: ["app"], level: "info"},

@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {createService, updateService, deleteService} from "../controllers/services.controller";
+import {createService, updateService, deleteService, getAllServices} from "../controllers/services.controller";
 import {authMiddleware} from "../middlewares/auth.middleware";
 
 const router = Router();
@@ -71,5 +71,19 @@ router.put("/:id", authMiddleware, updateService);
  *         description: Successfully deleted service
  */
 router.delete("/:id", authMiddleware, deleteService);
+/**
+ * @swagger
+ * /Service:
+ *   get:
+ *     tags: [Service]
+ *     responses:
+ *       '200':
+ *         description: Successfully get all services
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Service'
+ */
+router.get("", getAllServices);
 
 export default router;

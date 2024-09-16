@@ -28,7 +28,3 @@ export const updateBusiness = async (business: Business): Promise<Business | nul
         return null;
     }
 };
-
-// module.exports = {
-//     createBusiness,
-// };
