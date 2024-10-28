@@ -26,7 +26,7 @@ setupSwagger(app);
 
 export const startServer = async () => {
     try {
-        await connectDB();
+        // await connectDB();
         app.listen(port, () => {
             let specificDate: Date = new Date(2024, 5, 13);
             console.log(`Server is running on port ${port} ${specificDate}`);
