@@ -1,5 +1,6 @@
 services:
   - name: web
     env: node
+    buildCommand: npm install && npm run build
     startCommand: npm start
     port: 3000
