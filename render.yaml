@@ -2,4 +2,4 @@ services:
   - name: web
     env: node
     startCommand: npm start
-    port: 4000
+    port: 3000
