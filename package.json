@@ -4,10 +4,11 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node dist/index.js",
-        "test": "jest",
-        "build": "tsc",
-        "set-memory": "set NODE_OPTIONS=--max-old-space-size=1024"
+        "clean": "rm -rf dist",
+        "build": "tsc && ls dist",
+        "set-memory": "set NODE_OPTIONS=--max-old-space-size=1024",
+        "start": "node ./dist/index.js",
+        "test": "jest"
     },
     "keywords": [],
     "author": "",
