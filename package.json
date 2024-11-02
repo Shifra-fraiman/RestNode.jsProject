@@ -7,7 +7,7 @@
         "start": "ts-node src/index.ts",
         "test": "jest",
         "build": "tsc",
-        "set-memory": "export NODE_OPTIONS=--max-old-space-size=420"
+        "set-memory": "set NODE_OPTIONS=--max-old-space-size=512"
     },
     "keywords": [],
     "author": "",
@@ -37,7 +37,6 @@
         "@types/bcrypt": "^5.0.2",
         "@types/jest": "^29.5.12",
         "@types/jsonwebtoken": "^9.0.6",
-        "@types/supertest": "^6.0.2",
         "@types/swagger-jsdoc": "^6.0.4",
         "@types/swagger-ui-express": "^4.1.6",
         "jest": "^29.7.0",
