@@ -24,7 +24,7 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/Service'
  */
-router.post("", authMiddleware, createService);
+router.post("", /*authMiddleware,*/ createService);
 /**
  * @swagger
  * /Service/{id}:
@@ -52,7 +52,7 @@ router.post("", authMiddleware, createService);
  *             schema:
  *               $ref: '#/components/schemas/Service'
  */
-router.put("/:id", authMiddleware, updateService);
+router.put("/:id", /*authMiddleware,*/ updateService);
 /**
  * @swagger
  * /Service/{id}:
@@ -70,7 +70,7 @@ router.put("/:id", authMiddleware, updateService);
  *       '200':
  *         description: Successfully deleted service
  */
-router.delete("/:id", authMiddleware, deleteService);
+router.delete("/:id", /*authMiddleware, */deleteService);
 /**
  * @swagger
  * /Service:

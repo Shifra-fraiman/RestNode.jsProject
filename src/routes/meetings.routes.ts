@@ -24,7 +24,7 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/Meeting'
  */
-router.post("/", authMiddleware, createMeeting);
+router.post("/", /*authMiddleware,*/ createMeeting);
 /**
  * @swagger
  * /Meeting/{id}:
@@ -52,7 +52,7 @@ router.post("/", authMiddleware, createMeeting);
  *             schema:
  *               $ref: '#/components/schemas/Meeting'
  */
-router.put("/:id", authMiddleware, updateMeeting);
+router.put("/:id", /*authMiddleware,*/ updateMeeting);
 /**
  * @swagger
  * /Meeting/{id}:
@@ -70,7 +70,7 @@ router.put("/:id", authMiddleware, updateMeeting);
  *       '200':
  *         description: Successfully deleted meeting
  */
-router.delete("/:id", authMiddleware, deleteMeeting);
+router.delete("/:id", /*authMiddleware,*/ deleteMeeting);
 /**
  * @swagger
  * /Meeting:
@@ -86,6 +86,6 @@ router.delete("/:id", authMiddleware, deleteMeeting);
  *             schema:
  *               $ref: '#/components/schemas/Meeting'
  */
-router.get("", authMiddleware, getAllMeeting);
+router.get("", /*authMiddleware,*/ getAllMeeting);
 
 export default router;

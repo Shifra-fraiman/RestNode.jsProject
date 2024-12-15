@@ -20,13 +20,13 @@ app.use("/Business", businessRouter);
 app.use("/Meeting", meetingRouter);
 app.use("/Service", servicesRouter);
 app.use("/User", usersRouter);
-app.use("/Auth", authRouter);
+// app.use("/Auth", authRouter);
 
 setupSwagger(app);
 
 export const startServer = async () => {
     try {
-        // await connectDB();
+        await connectDB();
         app.listen(port, () => {
             let specificDate: Date = new Date(2024, 5, 13);
             console.log(`Server is running on port ${port} ${specificDate}`);

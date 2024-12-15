@@ -34,6 +34,6 @@ export const getAllServices = async () => {
     try {
         return await ServiceModel.find();
     } catch (error) {
-        console.error("The service update faild: " + error);
+        console.error("The get services faild: " + error);
     }
 };

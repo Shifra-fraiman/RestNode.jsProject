@@ -25,7 +25,7 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/Business'
  */
-router.post("", authMiddleware, createBusiness);
+router.post("", /*authMiddleware,*/ createBusiness);
 
 /**
  * @swagger
@@ -48,6 +48,6 @@ router.post("", authMiddleware, createBusiness);
  *             schema:
  *               $ref: '#/components/schemas/Business'
  */
-router.put("", authMiddleware, updateBusiness);
+router.put("", /*authMiddleware,*/ updateBusiness);
 
 export default router;

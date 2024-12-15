@@ -22,7 +22,7 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/User'
  */
-router.post("", authMiddleware, createUser);
+router.post("", /*authMiddleware,*/ createUser);
 /**
  * @swagger
  * /User/{id}:
@@ -44,6 +44,6 @@ router.post("", authMiddleware, createUser);
  *             schema:
  *               $ref: '#/components/schemas/User'
  */
-router.get("/:id", authMiddleware, getUser);
+router.get("/:id", /*authMiddleware,*/ getUser);
 
 export default router;

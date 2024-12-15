@@ -56,6 +56,6 @@ export const getAllServices = async (req: Request, res: Response) => {
     if (services) res.status(200).json(services);
     else {
         errorLog.error(`Error in deleteService`);
-        res.status(404).send({message: "The service delete failed!"});
+        res.status(404).send({message: "The get all services failed!"});
     }
 };

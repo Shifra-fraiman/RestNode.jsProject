@@ -13,7 +13,6 @@ const connectDB = async () => {
         console.log("Connecting to MongoDB Atlas with URI:", uri);
 
         await mongoose.connect(uri);
-
         console.log("Successfully connected to MongoDB Atlas");
     } catch (error) {
         console.error("MongoDB connection error:", error);
